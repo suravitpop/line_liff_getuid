@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting...</title>
+  <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+</head>
+<body>
+  <h1>Redirecting...</h1>
+  <script>
+    async function main() {
+      try {
+        // Initialize LIFF app with your LIFF ID
+        await liff.init({ liffId: "YOUR_LIFF_ID" });
+
+        // Check if the user is logged in
+        if (!liff.isLoggedIn()) {
+          liff.login(); // Redirect to LINE login if not logged in
+          return;
+        }
+
+        // Get the user profile to retrieve the user ID (UID)
+        const profile = await liff.getProfile();
+        const uid = profile.userId;
+
+        // Redirect to the desired URL with UID as a query parameter
+        const redirectUrl = `https://https://tally.so/r/3yxeZ0?line_uid=${uid}`;
+        window.location.href = redirectUrl;
+
+      } catch (error) {
+        console.error("Error retrieving LINE UID:", error);
+      }
+    }
+
+    main();
+  </script>
+</body>
+</html>
